@@ -1,6 +1,6 @@
 variable "github_repository_name" {
     type = string
-    default = "yamadatt"
+    default = "github-actions-ecr-push-example"
 }
 
 variable "github_user_name" {
