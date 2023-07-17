@@ -13,7 +13,7 @@ RUN go mod download \
 FROM alpine:3.18
 WORKDIR /app
 COPY --from=go_build /app/main .
-USER 1001
+#USER 1001
 CMD [ "/app/main" ]
 EXPOSE 80
 
