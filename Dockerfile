@@ -15,5 +15,5 @@ WORKDIR /app
 COPY --from=go_build /app/main .
 USER 1001
 CMD [ "/app/main" ]
-EXPOSE 8000
+EXPOSE 80
 
