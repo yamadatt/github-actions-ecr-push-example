@@ -37,5 +37,5 @@ jobs:
         # dockerイメージのタグを複数付与し、まとめてPUSHする。
         # まとめてPUSHするために、push -aとしている。
         run: |
-          docker build -t $REPOSITORY_URL:$IMAGE_TAG -t latest .
+          docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:$IMAGE_TAG:latest .
           docker push -a $REPOSITORY_URL
