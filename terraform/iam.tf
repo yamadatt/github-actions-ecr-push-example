@@ -52,7 +52,8 @@ resource "aws_iam_policy" "github" {
             "ecr:PutImage",
             "ecr:InitiateLayerUpload",
             "ecr:UploadLayerPart",
-            "ecr:CompleteLayerUpload"
+            "ecr:CompleteLayerUpload",
+            "ecs:RegisterTaskDefinition"
           ],
           "Resource" : "${aws_ecr_repository.sample.arn}"
         }
