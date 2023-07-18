@@ -18,7 +18,7 @@ resource "aws_iam_role" "github" {
           "Principal" : {
             "Federated" : "${aws_iam_openid_connect_provider.github.arn}"
           },
-          "Action" : "sts:AssumeRoleWithWebIdentity",
+          "Action" : "iam:PassRole",
           "Condition" : {
             "StringLike" : {
               "token.actions.githubusercontent.com:sub" : "repo:${var.github_user_name}/${var.github_repository_name}:*"
@@ -55,7 +55,7 @@ resource "aws_iam_policy" "github" {
             "ecr:CompleteLayerUpload",
             "ecs:RegisterTaskDefinition"
           ],
-          "Resource" : "${aws_ecr_repository.sample.arn}"
+          "Resource" : "*"
         }
       ]
     }
