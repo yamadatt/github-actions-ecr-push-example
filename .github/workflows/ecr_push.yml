@@ -8,8 +8,13 @@ on:
 env:
   # コミットのハッシュ。イメージに付与する。
   IMAGE_TAG: ${{ github.sha }}
-  ECS_TASK_DEFINITION: h4b-ecs-task-definition
-  CONTAINER_NAME: main
+  ECR_REPOSITORY: MY_ECR_REPOSITORY           # set this to your Amazon ECR repository name
+  ECS_SERVICE: h4b-ecs-service                # set this to your Amazon ECS service name
+  ECS_CLUSTER: h4b-ecs-cluster                # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: task-definition.json # set this to the path to your Amazon ECS task definition
+                                               # file, e.g. .aws/task-definition.json
+  CONTAINER_NAME: apache-helloworld           # set this to the name of the container in the
+                                               # containerDefinitions section of your task definition
 
 jobs:
   deploy:
@@ -43,14 +48,22 @@ jobs:
         run: |
           docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:latest .
           docker push -a $REPOSITORY_URL
-          echo "::set-output name=image-nginx::$ECR_REGISTRY/$REPOSITORY_URL:$IMAGE_TAG"
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
 
-      - name: Fill in the new nginx image ID in the Amazon ECS task definition
-        id: task-def-nginx
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          # task-def-phpで作成したtask-definition
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
-          image: ${{ steps.build-image.outputs.image-nginx }}
+          image: ${{ steps.build-image.outputs.image }}
+
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
