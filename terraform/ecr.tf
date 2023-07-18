@@ -1,5 +1,6 @@
 resource "aws_ecr_repository" "sample" {
   name = "sample"
+  force_delete = true
 }
 
 resource "aws_ecr_lifecycle_policy" "sample" {
