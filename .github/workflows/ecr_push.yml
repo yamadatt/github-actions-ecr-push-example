@@ -8,7 +8,7 @@ on:
 env:
   # コミットのハッシュ。イメージに付与する。
   IMAGE_TAG: ${{ github.sha }}
-  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_URL }}         # set this to your Amazon ECR repository name
+  #ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_URL }}         # set this to your Amazon ECR repository name
   ECS_SERVICE: h4b-ecs-service                # set this to your Amazon ECS service name
   ECS_CLUSTER: h4b-ecs-cluster                # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: ./task-definition.json # set this to the path to your Amazon ECS task definition
@@ -32,7 +32,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: github-actions-test-session
+          #role-session-name: github-actions-test-session
           #aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           #aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
