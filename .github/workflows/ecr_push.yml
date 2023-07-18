@@ -6,6 +6,7 @@ on:
       - main
 
 env:
+  # コミットのハッシュ。イメージに付与する。
   IMAGE_TAG: ${{ github.sha }}
 
 jobs:
@@ -34,8 +35,10 @@ jobs:
         id: build-image
         env:
           REPOSITORY_URL: ${{ secrets.ECR_REPOSITORY_URL }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         # dockerイメージのタグを複数付与し、まとめてPUSHする。latest運用を視野に入れてみる。
         # まとめてPUSHするために、push -aとしている。
         run: |
           docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:latest .
           docker push -a $REPOSITORY_URL
+          echo "::set-output name=image-mars_g_c::$ECR_REGISTRY/$REPOSITORY_URL:$IMAGE_TAG"
