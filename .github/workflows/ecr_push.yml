@@ -34,7 +34,7 @@ jobs:
         id: build-image
         env:
           REPOSITORY_URL: ${{ secrets.ECR_REPOSITORY_URL }}
-        # dockerイメージのタグを複数付与し、まとめてPUSHする。
+        # dockerイメージのタグを複数付与し、まとめてPUSHする。latest運用を視野に入れてみる。
         # まとめてPUSHするために、push -aとしている。
         run: |
           docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:latest .
