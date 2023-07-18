@@ -8,6 +8,8 @@ on:
 env:
   # コミットのハッシュ。イメージに付与する。
   IMAGE_TAG: ${{ github.sha }}
+  ECS_TASK_DEFINITION: h4b-ecs-task-definition
+  CONTAINER_NAME: main
 
 jobs:
   deploy:
@@ -41,4 +43,14 @@ jobs:
         run: |
           docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:latest .
           docker push -a $REPOSITORY_URL
-          echo "::set-output name=image-mars_g_c::$ECR_REGISTRY/$REPOSITORY_URL:$IMAGE_TAG"
+          echo "::set-output name=image-nginx::$ECR_REGISTRY/$REPOSITORY_URL:$IMAGE_TAG"
+
+
+      - name: Fill in the new nginx image ID in the Amazon ECS task definition
+        id: task-def-nginx
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          # task-def-phpで作成したtask-definition
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image-nginx }}
