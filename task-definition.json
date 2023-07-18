@@ -30,6 +30,7 @@
     }
   ],
   "family": "h4b-ecs-task-definition",
+  "executionRoleArn": "arn:aws:iam::449671225256:role/h4b-ecs-task-execution-role",
   "networkMode": "awsvpc",
   "volumes": [],
   "placementConstraints": [],
