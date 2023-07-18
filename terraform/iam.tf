@@ -18,7 +18,7 @@ resource "aws_iam_role" "github" {
           "Principal" : {
             "Federated" : "${aws_iam_openid_connect_provider.github.arn}"
           },
-          "Action" : "iam:PassRole",
+          "Action" : "sts:AssumeRoleWithWebIdentity",
           "Condition" : {
             "StringLike" : {
               "token.actions.githubusercontent.com:sub" : "repo:${var.github_user_name}/${var.github_repository_name}:*"
