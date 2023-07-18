@@ -1,0 +1,48 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "apache-helloworld",
+      "image": "449671225256.dkr.ecr.ap-northeast-1.amazonaws.com/sample:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp",
+          "name": "apache-helloworld",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/h4b-ecs-task-definition",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ],
+  "family": "h4b-ecs-task-definition",
+  "executionRoleArn": "arn:aws:iam::449671225256:role/h4b-ecs-task-execution-role",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "registeredAt": "2023-07-18T09:50:36.783000+09:00",
+  "registeredBy": "arn:aws:iam::449671225256:user/yamada"
+}
