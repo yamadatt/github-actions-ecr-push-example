@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "apache-helloworld",
-      "image": "449671225256.dkr.ecr.ap-northeast-1.amazonaws.com/:a36adf0702980b13cb3e41109dfc173cdc19c4b1",
+      "image": "449671225256.dkr.ecr.ap-northeast-1.amazonaws.com/:e8d5d2fbabe2dabf13b2a81d69e045781767d958",
       "cpu": 0,
       "portMappings": [
         {
