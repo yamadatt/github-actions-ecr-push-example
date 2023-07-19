@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "main" {
   [
     {
         "name": "${local.container_name}",
-        "image": "449671225256.dkr.ecr.ap-northeast-1.amazonaws.com/h4b-ecs-helloworld:e8d5d2fbabe2dabf13b2a81d69e045781767d958",
+        "image": "449671225256.dkr.ecr.ap-northeast-1.amazonaws.com/h4b-ecs-helloworld:latest",
         "cpu": 0,
         "portMappings": [
             {
