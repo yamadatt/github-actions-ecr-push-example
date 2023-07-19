@@ -35,32 +35,38 @@ resource "aws_iam_policy" "github" {
   policy = jsonencode(
     {
       "Version" : "2012-10-17",
-      "Statement" : [
-        {
-          "Effect" : "Allow",
-          "Action" : [
-            "ecr:GetAuthorizationToken",
-          ],
-          "Resource" : "*"
-        },
-        {
-          "Effect" : "Allow",
-          "Action" : [
-            "ecr:GetDownloadUrlForLayer",
-            "ecr:BatchGetImage",
-            "ecr:BatchCheckLayerAvailability",
-            "ecr:PutImage",
-            "ecr:InitiateLayerUpload",
-            "ecr:UploadLayerPart",
-            "ecr:CompleteLayerUpload",
+   "Statement":[
+      {
+         "Sid":"RegisterTaskDefinition",
+         "Effect":"Allow",
+         "Action":[
             "ecs:RegisterTaskDefinition"
-          ],
-          "Resource" : "*"
-        }
-      ]
-    }
-  )
-}
+         ],
+         "Resource":"*"
+      },
+      {
+         "Sid":"PassRolesInTaskDefinition",
+         "Effect":"Allow",
+         "Action":[
+            "iam:PassRole"
+         ],
+         "Resource":[
+            "arn:aws:iam::<aws_account_id>:role/<task_definition_task_role_name>",
+            "arn:aws:iam::449671225256:role/h4b-ecs-task-execution-role"
+         ]
+      },
+      {
+         "Sid":"DeployService",
+         "Effect":"Allow",
+         "Action":[
+            "ecs:UpdateService",
+            "ecs:DescribeServices"
+         ],
+         "Resource":[
+            "arn:aws:ecs:ap-northeast-1:449671225256:service/h4b-ecs-cluster/h4b-ecs-service"
+         ]
+      }
+   ]
 
 resource "aws_iam_role_policy_attachment" "role_deployer_policy_ecr_power_user" {
   role       = aws_iam_role.github.name
