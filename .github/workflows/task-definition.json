@@ -42,7 +42,6 @@
     "FARGATE"
   ],
   "cpu": "512",
-  "memory": "1024",
-  "registeredAt": "2023-07-18T09:50:36.783000+09:00",
-  "registeredBy": "arn:aws:iam::449671225256:user/yamada"
+  "memory": "1024"
+
 }
