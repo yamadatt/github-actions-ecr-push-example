@@ -78,7 +78,7 @@ jobs:
 
 
       - name: Update ECS Task definition
-        id: task-def
+        id: task-def-add
         uses: pooriaghaedi/amazon-ecs-deploy-task-definition@master
         env:
           ECS_TASK_DEFINITION: ${{ steps.task-def.outputs.task-definition }}
