@@ -81,4 +81,4 @@ jobs:
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
           wait-for-minutes: 1
-          force-new-deployment: true
+
