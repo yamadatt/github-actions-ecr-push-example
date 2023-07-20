@@ -16,4 +16,3 @@ COPY --from=go_build /app/main .
 #USER 1001
 CMD [ "/app/main" ]
 EXPOSE 80
-
