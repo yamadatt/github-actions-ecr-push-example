@@ -82,7 +82,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
-          push: false
+          push: true
           tags: ${{ github.sha }}        
 
       # - name: Fill in the new image ID in the Amazon ECS task definition
