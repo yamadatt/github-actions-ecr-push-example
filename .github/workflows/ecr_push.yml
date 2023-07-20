@@ -59,14 +59,13 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          REPOSITORY_URL: ${{ secrets.ECR_REPOSITORY_URL }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        # dockerイメージのタグを複数付与し、まとめてPUSHする。latest運用を視野に入れてみる。
-        # まとめてPUSHするために、push -aとしている。
+          ECR_REPOSITORY: h4b-ecs-helloworld
+          IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:latest .
-          docker push -a $REPOSITORY_URL
-          echo "image=$REPOSITORY_URL:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
