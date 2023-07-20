@@ -32,7 +32,7 @@
         }
     ],
     "placementConstraints": [],
-    "memory": "1024",
+    "memory": null,
     "taskRoleArn": null,
     "family": "h4b-ecs-task-definition",
     "pidMode": null,
@@ -40,7 +40,7 @@
         "FARGATE"
     ],
     "networkMode": "awsvpc",
-    "cpu": "512",
+    "cpu": null,
     "inferenceAccelerators": null,
     "proxyConfiguration": null,
     "volumes": []
