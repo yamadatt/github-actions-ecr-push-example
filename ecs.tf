@@ -29,10 +29,6 @@ resource "aws_ecs_task_definition" "main" {
             }
         ],
         "essential": true,
-        "environment": [],
-        "environmentFiles": [],
-        "mountPoints": [],
-        "volumesFrom": [],
         "logConfiguration": {
             "logDriver": "awslogs",
             "options": {
