@@ -17,7 +17,7 @@ resource "aws_ecs_task_definition" "main" {
   [
     {
         "name": "${local.container_name}",
-        "image": "449671225256.dkr.ecr.ap-northeast-1.amazonaws.com/h4b-ecs-helloworld:latest",
+        "image": "${aws_ecr_repository.main.repository_url}:latest",
         "cpu": 0,
         "portMappings": [
             {
@@ -56,7 +56,7 @@ resource "aws_ecs_service" "main" {
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.main.arn
   launch_type     = "FARGATE"
-  desired_count   = 2
+  desired_count   = 1
   network_configuration {
     subnets = [
       aws_subnet.public1.id,
