@@ -66,7 +66,7 @@ jobs:
         run: |
           docker build -t $REPOSITORY_URL:$IMAGE_TAG -t $REPOSITORY_URL:latest .
           docker push -a $REPOSITORY_URL
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "image=$REPOSITORY_URL:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
@@ -75,17 +75,10 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
+          
 
 
-      - name: Update ECS Task definition
-        id: task-def-add
-        uses: pooriaghaedi/amazon-ecs-deploy-task-definition@master
-        env:
-          ECS_TASK_DEFINITION: ${{ steps.task-def.outputs.task-definition }}
-          REGION: ap-northeast-1
-          IMAGE_URI: ${{ steps.build-image.outputs.image }}
-          ECS_CLUSTER: ${{ env.ECS_SERVICE }}
-          ECS_SERVICE: ${{ env.ECS_CLUSTER }} 
+
 
 
       - name: Deploy Amazon ECS task definition
