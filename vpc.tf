@@ -77,3 +77,68 @@ resource "aws_default_security_group" "default" {
     to_port     = 0
   }
 }
+
+
+resource "aws_security_group" "alb_sg" {
+  name        = "alb"
+  description = "Allow http and https traffic."
+  vpc_id = aws_vpc.main.id
+  # ここにingressを書かず、ルールはaws_security_group_ruleを使って定義する
+}
+
+# 80番ポート許可のインバウンドルール
+resource "aws_security_group_rule" "inbound_http" {
+  type        = "ingress"
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = [
+    "0.0.0.0/0"
+  ]
+
+  # ここでweb_serverセキュリティグループに紐付け
+  security_group_id = "${aws_security_group.alb_sg.id}"
+}
+
+# 443番ポート許可のインバウンドルール
+resource "aws_security_group_rule" "inbound_https" {
+  type        = "ingress"
+  from_port   = 443
+  to_port     = 443
+  protocol    = "tcp"
+  cidr_blocks = [
+    "0.0.0.0/0"
+  ]
+
+  # ここでweb_serverセキュリティグループに紐付け
+  security_group_id = "${aws_security_group.alb_sg.id}"
+}
+
+# 8091番ポート許可のインバウンドルール
+resource "aws_security_group_rule" "inbound_8091" {
+  type        = "ingress"
+  from_port   = 8091
+  to_port     = 8091
+  protocol    = "tcp"
+  cidr_blocks = [
+    "0.0.0.0/0",
+    "133.203.185.64/32"
+  ]
+
+  # ここでweb_serverセキュリティグループに紐付け
+  security_group_id = "${aws_security_group.alb_sg.id}"
+}
+
+# 8089番ポート許可のインバウンドルール
+resource "aws_security_group_rule" "outbound_any" {
+  type        = "egress"
+  protocol    = -1
+  from_port   = 0
+  to_port     = 0
+  cidr_blocks = [
+    "0.0.0.0/0"
+  ]
+
+  # ここでweb_serverセキュリティグループに紐付け
+  security_group_id = "${aws_security_group.alb_sg.id}"
+}
