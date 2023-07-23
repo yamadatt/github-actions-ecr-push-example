@@ -96,7 +96,7 @@ resource "aws_ecs_service" "mars_g_a" {
 
 
 resource "aws_ecs_task_definition" "mars_g_a" {
-  family                   = "h4b-ecs-task-definition"
+  family                   = "mars_g_a-definition"
   cpu                      = 512
   memory                   = 1024
   requires_compatibilities = ["FARGATE"]
@@ -106,7 +106,7 @@ resource "aws_ecs_task_definition" "mars_g_a" {
   [
     {
         "name": "${local.container_name2}",
-        "image": "${aws_ecr_repository.main.repository_url}:latest",
+        "image": "public.ecr.aws/nginx/nginx:latest",
         "cpu": 0,
         "portMappings": [
             {
