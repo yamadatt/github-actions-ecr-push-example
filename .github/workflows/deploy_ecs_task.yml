@@ -34,7 +34,7 @@ jobs:
 
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           #role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           #role-session-name: ${{ steps.session.outputs.name }}
@@ -80,7 +80,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v4
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: h4b-ecs-helloworld
