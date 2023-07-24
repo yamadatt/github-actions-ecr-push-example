@@ -56,13 +56,13 @@ resource "aws_ecs_service" "main" {
   desired_count   = 1
   network_configuration {
     subnets = [
-      aws_subnet.private1.id,
-      aws_subnet.private2.id
+      aws_subnet.public1.id,
+      aws_subnet.public2.id
     ]
     security_groups = [
       aws_default_security_group.default.id
     ]
-    assign_public_ip = false
+    assign_public_ip = true
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.main.arn
@@ -135,3 +135,6 @@ resource "aws_ecs_task_definition" "mars_g_a" {
     operating_system_family = "LINUX"
   }
 }
+
+
+
