@@ -189,10 +189,10 @@
         },
         "subnets": {
          "references": [
-          "aws_subnet.public1.id",
-          "aws_subnet.public1",
-          "aws_subnet.public2.id",
-          "aws_subnet.public2"
+          "aws_subnet.private1.id",
+          "aws_subnet.private1",
+          "aws_subnet.private2.id",
+          "aws_subnet.private2"
          ]
         }
        }
@@ -1331,8 +1331,8 @@
          "sg-0fd36ed1ae5c831c5"
         ],
         "subnets": [
-         "subnet-05b3694f240b3b6d1",
-         "subnet-0d5b6a5cde63fdab2"
+         "subnet-01d0040576a771c18",
+         "subnet-0a6fda85210a430a2"
         ]
        }
       ],
@@ -1630,7 +1630,7 @@
       "permissions_boundary": null,
       "role_last_used": [
        {
-        "last_used_date": "2023-07-24T11:03:24Z",
+        "last_used_date": "2023-07-24T11:16:24Z",
         "region": "ap-northeast-1"
        }
       ],
@@ -2831,8 +2831,8 @@
        "aws_ecs_task_definition.main",
        "aws_iam_role.ecs_task_execution_role",
        "aws_lb_target_group.main",
-       "aws_subnet.public1",
-       "aws_subnet.public2",
+       "aws_subnet.private1",
+       "aws_subnet.private2",
        "aws_vpc.main"
       ],
       "mode": "managed",
@@ -2912,8 +2912,8 @@
           "sg-0fd36ed1ae5c831c5"
          ],
          "subnets": [
-          "subnet-05b3694f240b3b6d1",
-          "subnet-0d5b6a5cde63fdab2"
+          "subnet-01d0040576a771c18",
+          "subnet-0a6fda85210a430a2"
          ]
         }
        ],
@@ -3228,7 +3228,7 @@
        "permissions_boundary": null,
        "role_last_used": [
         {
-         "last_used_date": "2023-07-24T11:03:24Z",
+         "last_used_date": "2023-07-24T11:16:24Z",
          "region": "ap-northeast-1"
         }
        ],
@@ -4722,8 +4722,8 @@
         "sg-0fd36ed1ae5c831c5"
        ],
        "subnets": [
-        "subnet-05b3694f240b3b6d1",
-        "subnet-0d5b6a5cde63fdab2"
+        "subnet-01d0040576a771c18",
+        "subnet-0a6fda85210a430a2"
        ]
       }
      ],
@@ -4816,8 +4816,8 @@
         "sg-0fd36ed1ae5c831c5"
        ],
        "subnets": [
-        "subnet-05b3694f240b3b6d1",
-        "subnet-0d5b6a5cde63fdab2"
+        "subnet-01d0040576a771c18",
+        "subnet-0a6fda85210a430a2"
        ]
       }
      ],
@@ -5368,7 +5368,7 @@
      "permissions_boundary": null,
      "role_last_used": [
       {
-       "last_used_date": "2023-07-24T11:03:24Z",
+       "last_used_date": "2023-07-24T11:16:24Z",
        "region": "ap-northeast-1"
       }
      ],
@@ -5408,7 +5408,7 @@
      "permissions_boundary": null,
      "role_last_used": [
       {
-       "last_used_date": "2023-07-24T11:03:24Z",
+       "last_used_date": "2023-07-24T11:16:24Z",
        "region": "ap-northeast-1"
       }
      ],
@@ -7332,7 +7332,7 @@
      "permissions_boundary": null,
      "role_last_used": [
       {
-       "last_used_date": "2023-07-24T11:03:24Z",
+       "last_used_date": "2023-07-24T11:16:24Z",
        "region": "ap-northeast-1"
       }
      ],
@@ -7372,8 +7372,8 @@
      "permissions_boundary": null,
      "role_last_used": [
       {
-       "last_used_date": "",
-       "region": ""
+       "last_used_date": "2023-07-24T11:10:24Z",
+       "region": "ap-northeast-1"
       }
      ],
      "tags": {},
@@ -7401,5 +7401,5 @@
   }
  ],
  "terraform_version": "1.5.0",
- "timestamp": "2023-07-24T11:16:55Z"
+ "timestamp": "2023-07-24T11:25:18Z"
 }]
