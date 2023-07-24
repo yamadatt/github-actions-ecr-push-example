@@ -62,7 +62,7 @@ resource "aws_ecs_service" "main" {
     security_groups = [
       aws_default_security_group.default.id
     ]
-    assign_public_ip = true
+    assign_public_ip = false
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.main.arn
